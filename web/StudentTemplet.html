@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="row bg-light">
+        <div class="span12  mx-auto">
+            <h1 class=" ">欢迎使用简化学生课程管理系统</h1>
+        </div>
+    </div>
+
+    <div class="container">
+       
+        <div class="row  border border-primary ">
+
+            <div class="col-2 bg-warning border border-primary ">
+                <span>这是2-1</span>
+                <nav class="navbar">
+                    <span>这是导航</span>
+                    <!-- Links -->
+                    <ul class="navbar-nav border border-white">
+                        <li class="nav-item">
+                            <a class="nav-link" href="StudentServlet">查询学生信息</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="CourseServlet?type=default&user=1">查询课程信息</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ScoreServlet">查询成绩信息</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="CourseAdd.html">添加课程信息</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-10 bg-primary border border-primary">
+                
+                <span>这是2-2</span>
+
+                <form class="border border-white"> 
+                    <span>这是form表单</span>
+
+                    <div class="form-row mx-auto">
+                        <div class="col">
+                            <label for="">学生姓名</label><input class="w-50" type="text" name="name" value="">
+                        </div>
+                        <div class="col">
+                            <label for="">主修专业</label><input class="w-50" type="text" name="major" value="">
+                        </div>
+                        <div class="col">
+                            <label for="">家庭地址</label><input class="w-50" type="text" name="score" value="">
+                        </div>
+                        <div class="col">
+                            <input type="submit" name="search" value="查询">
+                        </div>
+                    </div>
+                </form>
+
+
+
+                <div class="clearfix border border-white">
+                    <span>这是表格组件</span>
+
+                    <div class="col-md-12 column">
+
+                        <h2 align="center">学生信息如下</h2>
+
+                        <table class="table table-hover  table-info table-sm ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">选择</th>
+                                    <th scope="col">编号</th>
+                                    <th scope="col">姓名</th>
+                                    <th scope="col">地址</th>
+                                    <th scope="col">年龄</th>
+                                    <th scope="col">性别</th>
+                                    <th scope="col">专业</th>
+                                    <th scope="col">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${LoopStart}
+                                <tr>
+                                    <th><input type="checkbox" aria-label="Checkbox for following text input"></th>
+                                    <th scope="row">${id}</th>
+                                    <td>${name}</td>
+                                    <td>${address}</td>
+                                    <td>${age}</td>
+                                    <td>${sex}</td>
+                                    <td>${major}</td>
+
+                                    <td>
+                                        <input type="submit" value="删除" name="delete">
+                                        <input type="submit" value="修改" name="update">
+                                        <input type="submit" value="查看课表" name="">
+                                    </td>
+                                    ${LoopEnd}
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <nav aria-label="Page navigation example ">
+                    <span>这是分页组件</span>
+                    <ul class="pagination justify-content-end border border-white">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">下一页</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+            </div>
+
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+                integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+                crossorigin="anonymous"></script>
+</body>
+
+</html>
