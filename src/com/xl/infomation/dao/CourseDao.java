@@ -1,5 +1,6 @@
 package com.xl.infomation.dao;
 
+import com.xl.infomation.common.QFDatabase;
 import com.xl.infomation.domain.Course;
 
 import java.util.ArrayList;
@@ -16,6 +17,12 @@ public interface CourseDao {
 
     //修改一个课程的信息
     public int updateCourse(Course course);
+
+    //查询课程记录条数
+    public static int count(){
+        String sql = "select count(1) from course";
+        return QFDatabase.count(sql);
+    }
 
 
 

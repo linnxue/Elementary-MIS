@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 public class CourseService {
 
-    public static String showCourseList(String rootPath) {
+    public static String showCourseList(String rootPath,String pageIndex) {
         System.out.println("CourseService.showCourseList:显示所有的课程信息");
         //拼接文件名
         String filePath = rootPath + "/CourseTemplet.html";
         System.out.println("CourseFilePath:" + filePath);
         //读取文件内容并替换
-        return Manager.replaceCourseContent(filePath);
+        return Manager.replaceCourseContent(filePath,pageIndex);
     }
 
     //先删除指定的课程 然后再显示其余课程列表
@@ -26,7 +26,7 @@ public class CourseService {
             int state = QFDatabase.executeUpdate(sql, Integer.parseInt(id));
             System.out.println("state:" + state);
         }
-        return showCourseList(rootPath);
+        return showCourseList(rootPath,"0");
     }
 
     //进入修改页
@@ -63,7 +63,7 @@ public class CourseService {
             System.out.println(success);
             if (success > 0) {
                 //回列表页
-                return showCourseList(rootPath);
+                return showCourseList(rootPath,"0");
             } else {
                 System.out.println("CourseServlet.doPost:" + "添加失败");
             }

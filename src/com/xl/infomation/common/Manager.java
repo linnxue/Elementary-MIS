@@ -1,14 +1,20 @@
 package com.xl.infomation.common;
 
+import com.xl.infomation.dao.CourseDao;
 import com.xl.infomation.domain.Course;
 
 import java.util.*;
 
 public class Manager {
 
-    private static ArrayList<Course> courseList() {
-        String sql = "select id,name,major,score from course";
-        return QFDatabase.selectFromTable(sql, Course.class);
+    private static ArrayList<Course> courseList(String pageIndex) {
+        String sql = "select id,name,major,score from course limit ?,?";
+
+        int curPage = Integer.parseInt(pageIndex);
+
+        int startIndex = curPage*RequestType.perPageSize;
+
+        return QFDatabase.selectFromTable(sql, Course.class,startIndex,RequestType.perPageSize);
     }
 
     //替换修改页模板
@@ -106,7 +112,7 @@ public class Manager {
     }
 
     //替换课程内容的实际数据到html文件中（CourseTemplet.html）
-    public static String replaceCourseContent(String filePath) {
+    public static String replaceCourseContent(String filePath,String pageIndex) {
 
         //获得课程模板的全路径 filePath
         //读取课程模板的内容
@@ -125,7 +131,7 @@ public class Manager {
         if (startIndex < endIndex) {
             String str = buffer.substring(startIndex + startStr.length(), endIndex);
 
-            ArrayList<Course> list = courseList();
+            ArrayList<Course> list = courseList(pageIndex);
             for (Course c : list) {
                 String courseStr = replaceCourseList(c, str);
 //                System.out.println(c);
@@ -140,7 +146,61 @@ public class Manager {
 
         System.out.println(buffer.toString());
 
+        //完成页码的替换
+
+        buffer = replacePage(buffer,pageIndex);
+
         return buffer.toString();
+
+    }
+
+    //完成页码的替换 辅助方法
+    public static StringBuffer replacePage(StringBuffer buffer,String pageIndex){
+
+        int nextpage = Integer.parseInt(pageIndex)+1;
+        int prepage = Integer.parseInt(pageIndex)-1;
+        if(prepage<0){
+            prepage=0;
+        }
+
+        int count = CourseDao.count();
+        int lastPage= 0;
+        if(count%RequestType.perPageSize==0){
+            lastPage =count/RequestType.perPageSize-1;
+        }
+        else{
+            lastPage=count/RequestType.perPageSize;
+        }
+        if(nextpage>lastPage){
+            nextpage=lastPage;
+        }
+
+        //创建map对象
+        Map<String,String> map = new HashMap<>();
+
+        map.put("${nextpage}", nextpage+"");
+        map.put("${prepage}", prepage+"");
+        map.put("${lastpage}", lastPage+"");
+
+
+        //获得所有的key的集合
+        Set<String> set = map.keySet();
+        //获得迭代器
+        Iterator<String> iterator = set.iterator();
+        //遍历所有key的集合
+        while (iterator.hasNext()){
+            //获得每一个key
+            String key = iterator.next();
+            //获得和这个key对应的值
+            String value = map.get(key);
+
+            //查找将标记替换成真正的数据
+            int index = buffer.indexOf(key);
+            if(index>0){
+                buffer.replace(index, index+key.length(), value);
+            }
+        }
+        return buffer;
 
     }
 

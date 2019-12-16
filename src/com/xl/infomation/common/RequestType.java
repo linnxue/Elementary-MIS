@@ -33,4 +33,6 @@ public class RequestType {
     //分数id 在请求中的参数名
     public static final String scoreid = "scoreid";
 
+    public static final int perPageSize = 3;
+
 }

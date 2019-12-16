@@ -50,11 +50,20 @@
 			${LoopEnd}
 		</table>
 
-		<a href="CourseAdd.html">添加课程信息</a>
-		<div class="bg-danger"><a href="index.html">返回</a></div>
 
 
 
+		<div class="bg-warning w-50 mx-auto" align="center">
+			<a href="CourseServlet?type=default&page=0">首页</a>
+			<a href="CourseServlet?type=default&page=${nextpage}">下一页</a>
+			<a href="CourseServlet?type=default&page=${prepage}">上一页</a>
+			<a href="CourseServlet?type=default&page=${lastpage}">尾页</a>
+		</div>
+		</br>
+		<div align="right">
+			<a href="CourseAdd.html">添加课程信息</a>
+			<a href="index.html">返回</a>
+		</div>
 
 
 

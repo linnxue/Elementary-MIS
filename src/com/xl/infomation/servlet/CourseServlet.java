@@ -66,7 +66,15 @@ public class CourseServlet extends HttpServlet {
 
         String type = request.getParameter(RequestType.type);
         String id = request.getParameter("id");
+        String page = request.getParameter("page");
 
+        String curPage = "0";
+        if (page != null) {
+            curPage = page;
+        }
+
+
+        //获取当前资源所在的根路径
         String rootPath = getServletContext().getRealPath("/");
         String resultStr = "<html><head><body><h1> 出错了 </h1></body></head></html>";
 
@@ -87,7 +95,7 @@ public class CourseServlet extends HttpServlet {
                 break;
             default:
                 System.out.println("CourseServlet.doGet+请求课程列表页");
-                resultStr = CourseService.showCourseList(rootPath);
+                resultStr = CourseService.showCourseList(rootPath,curPage);
         }
         response.getOutputStream().write(resultStr.getBytes());
     }
