@@ -1,5 +1,6 @@
 package com.xl.infomation.servlet;
 
+import com.xl.infomation.common.Replace;
 import com.xl.infomation.common.RequestType;
 import com.xl.infomation.service.CourseService;
 

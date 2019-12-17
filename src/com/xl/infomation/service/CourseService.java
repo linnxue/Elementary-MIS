@@ -14,7 +14,7 @@ public class CourseService {
         System.out.println("CourseService.showCourseList:显示所有的课程信息");
         //拼接文件名
         String filePath = rootPath + "/CourseTemplet.html";
-        System.out.println("CourseFilePath:" + filePath);
+        System.out.println("本次打印==CourseFilePath:" + filePath);
         //读取文件内容并替换
         return Manager.replaceCourseContent(filePath,pageIndex);
     }
@@ -56,7 +56,8 @@ public class CourseService {
         } else if (score == null || score.length() == 0 || Integer.parseInt(score) == 0) {
             System.out.println("成绩不能为空");
         } else {
-            Course c = new Course(name, major, Integer.parseInt(score), Integer.parseInt(id));
+//            Course c = new Course(name, major, Integer.parseInt(score), Integer.parseInt(id));
+            Course c = new Course();
             CourseDao courseDao = new CourseDaoImpl();
 
             int success = courseDao.updateCourse(c);
@@ -82,7 +83,8 @@ public class CourseService {
         } else if (score == null || score.length() == 0 || Integer.parseInt(score) == 0) {
             System.out.println("成绩不能为空");
         } else {
-            Course c = new Course(name, major, Integer.parseInt(score), 0);
+//            Course c = new Course(name, major, Integer.parseInt(score), 0);
+            Course c = new Course();
             CourseDao courseDao = new CourseDaoImpl();
             int success = courseDao.addCourse(c);
             System.out.println(success);

@@ -1,68 +1,40 @@
 package com.xl.infomation.domain;
 
-import java.util.Random;
+import java.util.List;
 
 public class Student {
     //学生名
     private String name;
     //学生id
-    private int id;
+    private Integer id;
     //学生地址
     private String address;
     //学生年龄
-    private int age;
+    private Integer age;
     //学生性别
-    private char sex;
+    private String sex;
     //专业
     private String major;
 
+    //课程
+    private List<Course> courses;
+
+    //分数
+    private  List<Score> scores;
+
     public Student(){
-        this("","",0,'男',0);
-    }
-    public static String majorString(){
-        Random r = new Random();
-        String[] majorArray = {"Computer","English","Math","Article","Sport"};
-        return majorArray[r.nextInt(majorArray.length)];
+
     }
 
-    public Student(String name, String address, int age, char sex, int id) {
+    public Student(String name, Integer id, String address, Integer age, String sex, String major, List<Course> courses, List<Score> scores) {
         this.name = name;
         this.id = id;
         this.address = address;
         this.age = age;
         this.sex = sex;
-        this.major = majorString();
-
-    }
-
-
-    public void courseToFile(){
-        Random random = new Random();
-        //int count = random.nextInt()
-
-    }
-    @Override
-    //通过重写toString,把当前对象内容转成插入语句
-    public String toString(){
-        // insert into student (id,name,age,sex,address) values (1,"a",6,'男',"ttt");
-        String str = "insert into student (name,age,sex,address,major) values (";
-        //str += this.id+",";
-        str += "\""+ this.name+"\",";
-        str += this.age+",";
-        str += "\'"+ this.sex+"\',";
-        str += "\"" +this.address+ "\",";
-        str += "\"" +this.major+ "\"" + ");";
-
-        return str;
-
-    }
-
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
         this.major = major;
+        this.courses = courses;
+        this.scores = scores;
     }
 
     public String getName() {
@@ -73,11 +45,11 @@ public class Student {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -89,19 +61,43 @@ public class Student {
         this.address = address;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public List<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
     }
 }

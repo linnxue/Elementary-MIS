@@ -3,61 +3,64 @@ package com.xl.infomation.domain;
 //成绩类
 public class Score {
     //成绩id
-    private int id;
+    private Integer id;
     //学生id
-    private int sid;
+    private Integer sid;
     //课程id
-    private int cid;
+    private Integer cid;
     //成绩
-    private int score;
+    private Integer score;
 
     public Score(){
-        this(0,0,0);
+
     }
-    public Score(int sid, int cid, int score) {
+
+    public Score(Integer id, Integer sid, Integer cid, Integer score) {
+        this.id = id;
         this.sid = sid;
         this.cid = cid;
         this.score = score;
     }
-    @Override
-    public String toString(){
-        String str = "insert into score (sid,cid,score) values (";
-        str +=  this.sid+",";
-        str += this.cid+ ",";
-        str += this.score + ");";
 
-        return str;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getSid() {
+    public Integer getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(Integer sid) {
         this.sid = sid;
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "id=" + id +
+                ", sid=" + sid +
+                ", cid=" + cid +
+                ", score=" + score +
+                '}';
     }
 }

@@ -1,7 +1,9 @@
 package com.xl.infomation.servlet;
 
-import com.xl.infomation.common.Manager;
-import com.xl.infomation.common.StudentManager;
+import com.xl.infomation.common.Replace;
+import com.xl.infomation.common.RequestType;
+import com.xl.infomation.service.StudentService;
+import com.xl.infomation.service.StudentServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,9 @@ import java.io.IOException;
 
 @WebServlet(value = "/StudentServlet")
 public class StudentServlet extends HttpServlet {
+
+    StudentService studentService = new StudentServiceImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("StudentServlet.doPost");
     }
@@ -19,30 +24,38 @@ public class StudentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("StudentServlet.doGet");
 
-        //获得当前资源的根目录
-        String filePath = getServletContext().getRealPath("/");
 
-        //拼接文件名
-        filePath += "/StudentTemplet.html";
-//        System.out.println("StudentFilePath:"+filePath);
-
-
-        //读取文件内容并替换
-        String string = StudentManager.replaceStudentContent(filePath);
-
-        //设置当前请求对象的编码方式
         request.setCharacterEncoding("utf-8");
-
-        //设置响应数据类型的编码
         response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("utf-8");
 
-        //response.getWriter()---字符流
-        //response.getOutputStream()---字节流
+        String type = request.getParameter(RequestType.type);
+        String id = request.getParameter("id");
+        String page = request.getParameter("page");
 
-        response.getOutputStream().write(string.getBytes());
+        String curPage = "0";
+        if (page != null) {
+            curPage = page;
+        }
 
-//     response.sendRedirect("StudentTemplet.html");
+        //获取当前资源所在的根路径
+        String rootPath = getServletContext().getRealPath("/");
+        String resultStr = "<html><head><body><h1> 出错了 </h1></body></head></html>";
 
+        switch (type.trim()) {//去掉字符串前后空格
+            case RequestType.addStr:
+                break;
+            case RequestType.searchStr:
+                break;
+            case RequestType.deleteStr:
+                break;
+            //处理更新请求
+            case RequestType.updateStr:
+                break;
+            default:
+                resultStr = Replace.ReplaceSelectStudentList(rootPath, curPage);
+        }
+        response.getOutputStream().write(resultStr.getBytes());
 
     }
 }
